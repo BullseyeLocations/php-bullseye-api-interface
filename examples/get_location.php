@@ -1,0 +1,26 @@
+<?php
+//1. Include Bullseye library
+require_once '../Bullseye.php';
+
+//2. Create Bullseye object
+$clientId = 1234;
+$searchKey = null; //'cf623cdf-1090-43ba-8b0f-9fa67fcf9d57';
+$adminKey = '123456';
+$useStagingServer = true;
+$bullseye = new Bullseye\Bullseye($clientId, $searchKey, $adminKey, $useStagingServer);
+
+//2.1 activate debug mode
+$bullseye->debug(true);
+
+//3. Call method to get the location
+$locationId = '4885827';
+$location = $bullseye->getLocation($locationId);
+
+//4. Check location
+if($location)
+  print_r($location);
+else{
+  //if location was not found
+  print_r($bullseye->getLastError());
+}
+
