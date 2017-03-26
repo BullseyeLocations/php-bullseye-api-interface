@@ -83,4 +83,11 @@ class Bullseye{
   function searchLocations($args){
     return Search::search($this->connection, $args);
   }
+  
+  /**
+   * http://api.bullseyelocations.com/services/getcategories-method
+   */
+  function getCategories($order = false){
+    return Search::getCategories($this->connection, $order);
+  }
 }
