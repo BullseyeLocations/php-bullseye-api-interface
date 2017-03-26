@@ -147,7 +147,7 @@ class Connection{
     }
     
     //store error in request response
-    if($httpcode !== SELF::HTTP_OK)
+    if($httpcode !== self::HTTP_OK)
       $this->lastError = array(
         'code' => $httpcode,
         'response' => json_decode($response, $decodeAssoc)
