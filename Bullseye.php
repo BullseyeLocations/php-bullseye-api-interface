@@ -90,4 +90,12 @@ class Bullseye{
   function getCategories($order = false){
     return Search::getCategories($this->connection, $order);
   }
+  
+  /**
+   * https://bullseyelocations.readme.io/v1.0/reference#getallcountries
+   */
+  function getAllCountries(){
+    return Location::getAllCountries($this->connection);
+  }
 }
+
