@@ -87,5 +87,19 @@ class Location{
     //returns response
     return $response;
   }
-}
 
+  /**
+   * https://bullseyelocations.readme.io/v1.0/reference#getholidayhours
+   *
+   * @return mixed false if there is an error. Otherwise the request response.
+   */
+  static function getHolidayHours($connection, $args = array()){
+    //make request to Bullseye
+    list($httpcode, $response) = $connection->query("get", 'RestLocation.svc/GetHolidayHours', $args);
+    //check if response is invalid
+    if($httpcode !== $connection::HTTP_OK)
+      return false;
+    //returns response
+    return $response;
+  }
+}
