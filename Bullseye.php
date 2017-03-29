@@ -97,5 +97,11 @@ class Bullseye{
   function getAllCountries(){
     return Location::getAllCountries($this->connection);
   }
-}
 
+  /**
+   * https://bullseyelocations.readme.io/v1.0/reference#getholidayhours
+   */
+  function getHolidayHours($args){
+    return Location::getHolidayHours($this->connection, $args);
+  }
+}
