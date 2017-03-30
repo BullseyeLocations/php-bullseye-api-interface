@@ -62,6 +62,13 @@ class Search{
       'action' => 'RestSearch.svc/GetCountriesContainedInTerritories'
     ),
     
+    /**
+     * https://bullseyelocations.readme.io/v1.0/reference#getcitylist
+     */
+    'GetCityList' => array(
+      'httpMethod' => 'get',
+      'action' => 'RestSearch.svc/GetCityList'
+    ),
   );
   
   /**
