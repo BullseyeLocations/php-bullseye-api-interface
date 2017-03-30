@@ -158,4 +158,61 @@ class Connection{
     //returns response
     return array($httpcode, json_decode($response, $decodeAssoc));
   }
+  
+  /**
+   * This function makes a query and process its response. It is created to not duplicate code in most of requests.
+   *
+   * $method array Associative array with info of method to execute. i.e:
+   *   'GetCatSum' => [
+   *     'httpMethod' => 'get',
+   *     'action' => 'ModulePath/MyAction',
+   *     'callbacks' => [ //<-- optional
+   *       'before_query' => 'my_fun_1',
+   *       'after_query' => [
+   *         'class' => 'MyClass', //<-- optional
+   *         'method' => 'my_fun_2'
+   *       ]
+   *     ]
+   *   ]
+   * $args array Associative array with data to send in request.
+   *
+   * @return mixed false if there is an error. Otherwise the request response.
+   */
+  public function process_query($method, $args = array(), $callbacksArgs = array()){
+    //extract arg to make query
+    $httpMethod = $action = $decodeAssoc = $callbacks = null;
+    extract($method);
+    
+    //first callback to edit args before query execution
+    if(!empty($callbacks['before_query']))
+      $args = self::executeCallback($callbacks['before_query'], $callbacksArgs, $args);
+  
+    //makes requests
+    list($httpcode, $response) = $this->query($httpMethod, $action, $args, $decodeAssoc);
+    
+    //validate HTTP code of response
+    if($httpcode !== self::HTTP_OK) {
+      return false;
+    }
+    
+    //second callback before returning response
+    if(!empty($callbacks['after_query']))
+      $response = self::executeCallback($callbacks['after_query'], $response, $callbacksArgs, $args);
+    
+    //returns response
+    return $response;
+  }
+  
+  /**
+   * This function executes callbacks in process_query function.
+   */
+  private static function executeCallback($callback, $param1, $param2, $param3 = null){
+    //check callback data
+    if(!empty($callback['class']) && !empty($callback['method']) && method_exists($callback['class'], $callback['method'])){
+      return call_user_func([$callback['class'], $callback['method']], $param1, $param2, $param3);
+    }
+    
+    return false;
+  }
 }
+

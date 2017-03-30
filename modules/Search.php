@@ -4,38 +4,57 @@ namespace Bullseye;
 class Search{
 
   /**
-   * http://api.bullseyelocations.com/services/dosearch2-method
-   *
-   * @return mixed false if there is an error. Otherwise the request response.
+   * Meta data to make requests of Search module.
    */
-  static function search($connection, $args) {
-    list($httpcode, $response) = $connection->query("get", 'RestSearch.svc/DoSearch2', $args);
-    if($httpcode !== $connection::HTTP_OK) {
-      return false;
-    }
-    return $response;
-  }
+  static $actions = array(
+  
+    /**
+     * http://api.bullseyelocations.com/services/dosearch2-method
+     */
+    'DoSearch2' => array(
+      'httpMethod' => 'get',
+      'action' => 'RestSearch.svc/DoSearch2',
+    ),
+    
+    /**
+     * http://api.bullseyelocations.com/services/getcategories-method
+     */
+    'GetCategories' => array(
+      'httpMethod' => 'get',
+      'action' => 'RestSearch.svc/GetCategories',
+      'callbacks' => array(
+        'after_query' => array(
+          'class' => '\Bullseye\Search',
+          'method' => 'sort_categories'
+        )
+      )
+    ),
+
+    /**
+     * https://bullseyelocations.readme.io/v1.0/reference#getcatsum
+     */
+    'GetCatSum' => array(
+      'httpMethod' => 'get',
+      'action' => 'RestSearch.svc/GetCatSum'
+    ),
+    
+    
+  );
   
   /**
-   * http://api.bullseyelocations.com/services/getcategories-method
+   * Used in callback after_query.
    *
-   * @param $order boolean if true, then categories are ordered alphabetically. Default is false.
-   *
-   * @return mixed false if there is an error. Otherwise the request response.
+   * Sort categorires alphabetically in action GetCategories.
    */
-  static function getCategories($connection, $order = false){
-    list($httpcode, $response) = $connection->query("get", 'RestSearch.svc/GetCategories');
-    if($httpcode !== $connection::HTTP_OK) {
-      return false;
-    }
-    
+  static function sort_categories($response, $callbackArgs, $args){
     //make ordering
-    if($order){
+    if(!empty($callbackArgs['order'])){
       usort($response, function($a, $b){
-        return strcasecmp($a['CategoryName'], $b['CategoryName']);
+        return strcasecmp($a->CategoryName, $b->CategoryName);
       });
     }
     
     return $response;
   }
 }
+

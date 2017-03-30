@@ -78,20 +78,6 @@ class Bullseye{
   }
   
   /**
-   * http://api.bullseyelocations.com/services/dosearch2-method
-   */
-  function searchLocations($args){
-    return Search::search($this->connection, $args);
-  }
-  
-  /**
-   * http://api.bullseyelocations.com/services/getcategories-method
-   */
-  function getCategories($order = false){
-    return Search::getCategories($this->connection, $order);
-  }
-  
-  /**
    * https://bullseyelocations.readme.io/v1.0/reference#getallcountries
    */
   function getAllCountries(){
@@ -103,5 +89,26 @@ class Bullseye{
    */
   function getHolidayHours($args){
     return Location::getHolidayHours($this->connection, $args);
+  }
+  
+  /**
+   * http://api.bullseyelocations.com/services/dosearch2-method
+   */
+  function searchLocations($args){
+    return $this->connection->process_query(Search::$actions['DoSearch2']);
+  }
+  
+  /**
+   * http://api.bullseyelocations.com/services/getcategories-method
+   */
+  function getCategories($order = false){
+    return $this->connection->process_query(Search::$actions['GetCategories'], null, compact('order'));
+  }
+  
+  /**
+   * https://bullseyelocations.readme.io/v1.0/reference#getcatsum
+   */
+  function getCatSum($args){
+    return $this->connection->process_query(Search::$actions['GetCatSum']);
   }
 }
