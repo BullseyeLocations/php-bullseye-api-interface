@@ -181,4 +181,11 @@ class Bullseye{
   function getCategoryTree($LanguageID = null, $LanguageCode = null){
     return $this->connection->process_query(Search::$actions['GetCategoryTree'], compact('LanguageID', 'LanguageCode'));
   }
+  
+  /**
+   * https://bullseyelocations.readme.io/v1.0/reference#getclientsearchsettings-2
+   */
+  function getClientSearchSettings($RegionId){
+    return $this->connection->process_query(Search::$actions['GetClientSearchSettings'], compact('RegionId'));
+  }
 }
