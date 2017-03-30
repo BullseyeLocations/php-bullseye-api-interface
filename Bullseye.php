@@ -174,4 +174,11 @@ class Bullseye{
   function getSearchLog($startDate, $endDate){
     return $this->connection->process_query(Search::$actions['GetSearchLog'], compact('startDate', 'endDate'));
   }
+  
+  /**
+   * https://bullseyelocations.readme.io/v1.0/reference#getcategorytree
+   */
+  function getCategoryTree($LanguageID = null, $LanguageCode = null){
+    return $this->connection->process_query(Search::$actions['GetCategoryTree'], compact('LanguageID', 'LanguageCode'));
+  }
 }
