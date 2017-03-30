@@ -118,4 +118,11 @@ class Bullseye{
   function getStatesByCountry($countryId){
     return $this->connection->process_query(Search::$actions['GetStatesByCountry'], compact('countryId'));
   }
+  
+  /**
+   * https://bullseyelocations.readme.io/v1.0/reference#getcountrylist
+   */
+  function getCountryList(){
+    return $this->connection->process_query(Search::$actions['GetCountryList']);
+  }
 }
