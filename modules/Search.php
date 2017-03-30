@@ -93,6 +93,14 @@ class Search{
       'httpMethod' => 'get',
       'action' => 'RestSearch.svc/GetAttributes'
     ),
+    
+    /**
+     * https://bullseyelocations.readme.io/v1.0/reference#getpostalcode
+     */
+    'GetPostalCode' => array(
+      'httpMethod' => 'get',
+      'action' => 'RestSearch.svc/GetPostalCode'
+    ),
   );
   
   /**
