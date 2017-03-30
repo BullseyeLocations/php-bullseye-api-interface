@@ -167,4 +167,11 @@ class Bullseye{
   function getPostalCode($CountryId, $PostalCode = null){
     return $this->connection->process_query(Search::$actions['GetPostalCode'], compact('CountryId', 'PostalCode'));
   }
+  
+  /**
+   * https://bullseyelocations.readme.io/v1.0/reference#getsearchlog
+   */
+  function getSearchLog($startDate, $endDate){
+    return $this->connection->process_query(Search::$actions['GetSearchLog'], compact('startDate', 'endDate'));
+  }
 }
