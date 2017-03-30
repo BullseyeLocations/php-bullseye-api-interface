@@ -132,4 +132,11 @@ class Bullseye{
   function getCountriesContainedInTerritories(){
     return $this->connection->process_query(Search::$actions['GetCountriesContainedInTerritories']);
   }
+  
+  /**
+   * https://bullseyelocations.readme.io/v1.0/reference#getcitylist
+   */
+  function getCityList($CountryId, $StateAbbr = null){
+    return $this->connection->process_query(Search::$actions['GetCityList'], compact('CountryId', 'StateAbbr'));
+  }
 }
