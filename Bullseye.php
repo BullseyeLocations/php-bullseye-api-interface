@@ -153,4 +153,11 @@ class Bullseye{
   function getAttributeOptions($AttributeId = null){
     return $this->connection->process_query(Search::$actions['GetAttributeOptions'], compact('AttributeId'));
   }
+  
+  /**
+   * https://bullseyelocations.readme.io/v1.0/reference#getattributes
+   */
+  function getAttributes(){
+    return $this->connection->process_query(Search::$actions['GetAttributeOptions']);
+  }
 }
