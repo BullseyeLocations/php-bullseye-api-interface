@@ -160,4 +160,11 @@ class Bullseye{
   function getAttributes(){
     return $this->connection->process_query(Search::$actions['GetAttributeOptions']);
   }
+  
+  /**
+   * https://bullseyelocations.readme.io/v1.0/reference#getpostalcode
+   */
+  function getPostalCode($CountryId, $PostalCode = null){
+    return $this->connection->process_query(Search::$actions['GetPostalCode'], compact('CountryId', 'PostalCode'));
+  }
 }
