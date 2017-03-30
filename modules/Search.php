@@ -38,7 +38,13 @@ class Search{
       'action' => 'RestSearch.svc/GetCatSum'
     ),
     
-    
+    /**
+     * https://bullseyelocations.readme.io/v1.0/reference#getstatesbycountry
+     */
+    'GetStatesByCountry' => array(
+      'httpMethod' => 'get',
+      'action' => 'RestSearch.svc/GetStatesByCountry'
+    ),
   );
   
   /**

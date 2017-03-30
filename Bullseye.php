@@ -111,4 +111,11 @@ class Bullseye{
   function getCatSum($args){
     return $this->connection->process_query(Search::$actions['GetCatSum']);
   }
+  
+  /**
+   * https://bullseyelocations.readme.io/v1.0/reference#getstatesbycountry
+   */
+  function getStatesByCountry($countryId){
+    return $this->connection->process_query(Search::$actions['GetStatesByCountry'], compact('countryId'));
+  }
 }
