@@ -77,6 +77,14 @@ class Search{
       'httpMethod' => 'get',
       'action' => 'RestSearch.svc/GetCatList'
     ),
+    
+    /**
+     * https://bullseyelocations.readme.io/v1.0/reference#getattributeoptions
+     */
+    'GetAttributeOptions' => array(
+      'httpMethod' => 'get',
+      'action' => 'RestSearch.svc/GetAttributeOptions'
+    ),
   );
   
   /**
