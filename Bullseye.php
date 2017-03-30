@@ -146,4 +146,11 @@ class Bullseye{
   function getCatList($CountryId, $State = null, $City = null){
     return $this->connection->process_query(Search::$actions['GetCatList'], compact('CountryId', 'State', 'City'));
   }
+  
+  /**
+   * https://bullseyelocations.readme.io/v1.0/reference#getattributeoptions
+   */
+  function getAttributeOptions($AttributeId = null){
+    return $this->connection->process_query(Search::$actions['GetAttributeOptions'], compact('AttributeId'));
+  }
 }
