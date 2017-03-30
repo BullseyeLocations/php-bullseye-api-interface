@@ -109,6 +109,14 @@ class Search{
       'httpMethod' => 'get',
       'action' => 'RestSearch.svc/GetSearchLog'
     ),
+    
+    /**
+     * https://bullseyelocations.readme.io/v1.0/reference#getcategorytree
+     */
+    'GetCategoryTree' => array(
+      'httpMethod' => 'get',
+      'action' => 'RestSearch.svc/GetCategoryTree'
+    ),
   );
   
   /**
