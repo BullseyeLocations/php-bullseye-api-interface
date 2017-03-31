@@ -49,6 +49,8 @@ class Bullseye{
 
   /**
    * http://api.bullseyelocations.com/services/getlocation-method-0
+   *
+   * Location module.
    */
   function getLocation($locationId){
     return Location::getLocation($this->connection, $locationId);
@@ -56,6 +58,8 @@ class Bullseye{
 
   /**
    * http://api.bullseyelocations.com/services/addlocation-method
+   *
+   * Location module.
    */
   function addLocation($locationData){
     return Location::addLocation($this->connection, $locationData);
@@ -65,6 +69,8 @@ class Bullseye{
    * http://api.bullseyelocations.com/services/updatelocation-method
    *
    * @return mixed false if there is an error. Otherwise the request response.
+   *
+   * Location module.
    */
   function updateLocation($locationId, $locationData){
     return Location::updateLocation($this->connection, $locationId, $locationData);
@@ -72,6 +78,8 @@ class Bullseye{
 
   /**
    * http://api.bullseyelocations.com/services/deletelocations-method
+   *
+   * Location module.
    */
   function deleteLocation($locationId){
     return Location::deleteLocation($this->connection, $locationId);
@@ -79,6 +87,8 @@ class Bullseye{
   
   /**
    * https://bullseyelocations.readme.io/v1.0/reference#getallcountries
+   *
+   * Location module.
    */
   function getAllCountries(){
     return Location::getAllCountries($this->connection);
@@ -86,6 +96,8 @@ class Bullseye{
 
   /**
    * https://bullseyelocations.readme.io/v1.0/reference#getholidayhours
+   *
+   * Location module.
    */
   function getHolidayHours($args){
     return Location::getHolidayHours($this->connection, $args);
@@ -93,13 +105,17 @@ class Bullseye{
   
   /**
    * http://api.bullseyelocations.com/services/dosearch2-method
+   *
+   * Search module.
    */
   function searchLocations($args){
-    return $this->connection->process_query(Search::$actions['DoSearch2']);
+    return $this->connection->process_query(Search::$actions['DoSearch2'], $args);
   }
   
   /**
    * http://api.bullseyelocations.com/services/getcategories-method
+   *
+   * Search module.
    */
   function getCategories($order = false){
     return $this->connection->process_query(Search::$actions['GetCategories'], null, compact('order'));
@@ -107,13 +123,17 @@ class Bullseye{
   
   /**
    * https://bullseyelocations.readme.io/v1.0/reference#getcatsum
+   *
+   * Search module.
    */
   function getCatSum($args){
-    return $this->connection->process_query(Search::$actions['GetCatSum']);
+    return $this->connection->process_query(Search::$actions['GetCatSum'], $args);
   }
   
   /**
    * https://bullseyelocations.readme.io/v1.0/reference#getstatesbycountry
+   *
+   * Search module.
    */
   function getStatesByCountry($countryId){
     return $this->connection->process_query(Search::$actions['GetStatesByCountry'], compact('countryId'));
@@ -121,6 +141,8 @@ class Bullseye{
   
   /**
    * https://bullseyelocations.readme.io/v1.0/reference#getcountrylist
+   *
+   * Search module.
    */
   function getCountryList(){
     return $this->connection->process_query(Search::$actions['GetCountryList']);
@@ -128,6 +150,8 @@ class Bullseye{
   
   /**
    * https://bullseyelocations.readme.io/v1.0/reference#getcountriescontainedinterritories
+   *
+   * Search module.
    */
   function getCountriesContainedInTerritories(){
     return $this->connection->process_query(Search::$actions['GetCountriesContainedInTerritories']);
@@ -135,6 +159,8 @@ class Bullseye{
   
   /**
    * https://bullseyelocations.readme.io/v1.0/reference#getcitylist
+   *
+   * Search module.
    */
   function getCityList($CountryId, $StateAbbr = null){
     return $this->connection->process_query(Search::$actions['GetCityList'], compact('CountryId', 'StateAbbr'));
@@ -142,6 +168,8 @@ class Bullseye{
   
   /**
    * https://bullseyelocations.readme.io/v1.0/reference#getcatlist
+   *
+   * Search module.
    */
   function getCatList($CountryId, $State = null, $City = null){
     return $this->connection->process_query(Search::$actions['GetCatList'], compact('CountryId', 'State', 'City'));
@@ -149,6 +177,8 @@ class Bullseye{
   
   /**
    * https://bullseyelocations.readme.io/v1.0/reference#getattributeoptions
+   *
+   * Search module.
    */
   function getAttributeOptions($AttributeId = null){
     return $this->connection->process_query(Search::$actions['GetAttributeOptions'], compact('AttributeId'));
@@ -156,6 +186,8 @@ class Bullseye{
   
   /**
    * https://bullseyelocations.readme.io/v1.0/reference#getattributes
+   *
+   * Search module.
    */
   function getAttributes(){
     return $this->connection->process_query(Search::$actions['GetAttributeOptions']);
@@ -163,6 +195,8 @@ class Bullseye{
   
   /**
    * https://bullseyelocations.readme.io/v1.0/reference#getpostalcode
+   *
+   * Search module.
    */
   function getPostalCode($CountryId, $PostalCode = null){
     return $this->connection->process_query(Search::$actions['GetPostalCode'], compact('CountryId', 'PostalCode'));
@@ -170,6 +204,8 @@ class Bullseye{
   
   /**
    * https://bullseyelocations.readme.io/v1.0/reference#getsearchlog
+   *
+   * Search module.
    */
   function getSearchLog($startDate, $endDate){
     return $this->connection->process_query(Search::$actions['GetSearchLog'], compact('startDate', 'endDate'));
@@ -177,6 +213,8 @@ class Bullseye{
   
   /**
    * https://bullseyelocations.readme.io/v1.0/reference#getcategorytree
+   *
+   * Search module.
    */
   function getCategoryTree($LanguageID = null, $LanguageCode = null){
     return $this->connection->process_query(Search::$actions['GetCategoryTree'], compact('LanguageID', 'LanguageCode'));
@@ -184,6 +222,8 @@ class Bullseye{
   
   /**
    * https://bullseyelocations.readme.io/v1.0/reference#getclientsearchsettings-2
+   *
+   * Search module.
    */
   function getClientSearchSettings($RegionId){
     return $this->connection->process_query(Search::$actions['GetClientSearchSettings'], compact('RegionId'));

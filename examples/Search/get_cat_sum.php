@@ -14,6 +14,9 @@ $bullseye = new Bullseye\Bullseye($clientId, $searchKey, $adminKey, $useStagingS
 
 //3. Call method to get categories
 $args = array(
+  'City' => 'Somerset',
+  'State' => 'NJ',
+  'Radius' => 10
 );
 $response = $bullseye->getCatSum($args);
 
