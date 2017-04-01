@@ -4,6 +4,7 @@ namespace Bullseye;
 require_once "Connection.php";
 include_once "modules/Location.php";
 include_once "modules/Search.php";
+include_once "modules/Lead.php";
 
 /**
  * Front controller to handle all requests make to Bullseye API. This class loads other modules
@@ -227,5 +228,32 @@ class Bullseye{
    */
   function getClientSearchSettings($RegionId){
     return $this->connection->process_query(Search::$actions['GetClientSearchSettings'], compact('RegionId'));
+  }
+  
+  /**
+   * https://bullseyelocations.readme.io/v1.0/reference#addlead
+   *
+   * Lead module.
+   */
+  function addLead($args){
+    return $this->connection->process_query(Lead::$actions['AddLead'], $args);
+  }
+  
+  /**
+   * https://bullseyelocations.readme.io/v1.0/reference#getleadsources
+   *
+   * Lead module.
+   */
+  function getLeadSources(){
+    return $this->connection->process_query(Lead::$actions['GetLeadSources']);
+  }
+  
+  /**
+   * https://bullseyelocations.readme.io/v1.0/reference#testinput-1
+   *
+   * Lead module.
+   */
+  function authenticateClient(){
+    return $this->connection->process_query(Lead::$actions['AuthenticateClient']);
   }
 }
