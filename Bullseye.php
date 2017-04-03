@@ -6,6 +6,7 @@ include_once "modules/Location.php";
 include_once "modules/Search.php";
 include_once "modules/Lead.php";
 include_once "modules/User.php";
+include_once "modules/EventSearch.php";
 
 /**
  * Front controller to handle all requests make to Bullseye API. This class loads other modules
@@ -283,5 +284,14 @@ class Bullseye{
    */
   function changeActiveStatus($userName, $activeStatus){
     return $this->connection->process_query(User::$actions['ChangeActiveStatus'], compact('userName', 'activeStatus'));
+  }
+  
+  /**
+   * https://bullseyelocations.readme.io/v1.0/reference#eventsearch
+   *
+   * Event Search module.
+   */
+  function eventSearch($args){
+    return $this->connection->process_query(EventSearch::$actions['EventSearch'], $args);
   }
 }
