@@ -107,6 +107,15 @@ class Bullseye{
   }
   
   /**
+   * https://bullseyelocations.readme.io/v1.0/reference#gettimezones
+   *
+   * Location module.
+   */
+  function getTimeZones(){
+    return Location::getTimeZones($this->connection);
+  }
+  
+  /**
    * http://api.bullseyelocations.com/services/dosearch2-method
    *
    * Search module.

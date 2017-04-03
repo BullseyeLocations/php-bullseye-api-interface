@@ -102,4 +102,19 @@ class Location{
     //returns response
     return $response;
   }
+  
+  /**
+   * https://bullseyelocations.readme.io/v1.0/reference#gettimezones
+   *
+   * @return mixed false if there is an error. Otherwise the request response.
+   */
+  static function getTimeZones($connection){
+    //make request to Bullseye
+    list($httpcode, $response) = $connection->query("get", 'RestLocation.svc/GetTimeZones');
+    //check if response is invalid
+    if($httpcode !== $connection::HTTP_OK)
+      return false;
+    //returns response
+    return $response;
+  }
 }
