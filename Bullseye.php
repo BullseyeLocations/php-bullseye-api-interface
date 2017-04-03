@@ -5,6 +5,7 @@ require_once "Connection.php";
 include_once "modules/Location.php";
 include_once "modules/Search.php";
 include_once "modules/Lead.php";
+include_once "modules/User.php";
 
 /**
  * Front controller to handle all requests make to Bullseye API. This class loads other modules
@@ -255,5 +256,32 @@ class Bullseye{
    */
   function authenticateClient(){
     return $this->connection->process_query(Lead::$actions['AuthenticateClient']);
+  }
+  
+  /**
+   * https://bullseyelocations.readme.io/v1.0/reference#changepassword
+   *
+   * User module.
+   */
+  function changePassword($userName, $newPassword){
+    return $this->connection->process_query(User::$actions['ChangePassword'], compact('userName', 'newPassword'));
+  }
+  
+  /**
+   * https://bullseyelocations.readme.io/v1.0/reference#changeusername
+   *
+   * User module.
+   */
+  function changeUsername($oldUserName, $newUserName){
+    return $this->connection->process_query(User::$actions['ChangeUsername'], compact('oldUserName', 'newUserName'));
+  }
+  
+  /**
+   * https://bullseyelocations.readme.io/v1.0/reference#changeactivestatus
+   *
+   * User module.
+   */
+  function changeActiveStatus($userName, $activeStatus){
+    return $this->connection->process_query(User::$actions['ChangeActiveStatus'], compact('userName', 'activeStatus'));
   }
 }
