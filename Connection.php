@@ -106,7 +106,7 @@ class Connection{
     $options[CURLOPT_RETURNTRANSFER] = true;
 
     //check if request is POST
-    if( "post" == $httpMethod) {
+    if("post" == $httpMethod) {
       $dataString = json_encode($args);
 
       $options[CURLOPT_POST] = 1;
@@ -126,6 +126,11 @@ class Connection{
     if($this->debug){
       echo "Curl Info: ";
       print_r(curl_getinfo($curl));
+      
+      if("post" == $httpMethod) {
+        echo "Post Data: ";
+        print_r($args);
+      }
       
       echo "Response: ";
       print_r($response);
