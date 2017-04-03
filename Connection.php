@@ -6,8 +6,8 @@ class Connection{
    * URL of REST services.
    * @var url
    */
-  private $production_url = "http://leadmanagerws.electricvine.com";
-  private $staging_url = "http://leadmanagerws.staging.electricvine.com";
+  private $production_url = "http://ws.bullseyelocations.com";
+  private $staging_url = "http://ws.staging.bullseyelocations.com";
   
   /**
    * Client ID in Bullseye platform.
