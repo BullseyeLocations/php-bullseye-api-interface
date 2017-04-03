@@ -19,6 +19,14 @@ class User{
       'httpMethod' => 'post',
       'action' => 'RestUser.svc/ChangePassword',
     ),
-  );  
+    
+    /**
+     * https://bullseyelocations.readme.io/v1.0/reference#changeusername
+     */
+    'ChangeUsername' => array(
+      'httpMethod' => 'post',
+      'action' => 'RestUser.svc/ChangeUsername',
+    ),
+  );
 }
 

@@ -266,4 +266,13 @@ class Bullseye{
   function changePassword($userName, $newPassword){
     return $this->connection->process_query(User::$actions['ChangePassword'], compact('userName', 'newPassword'));
   }
+  
+  /**
+   * https://bullseyelocations.readme.io/v1.0/reference#changeusername
+   *
+   * User module.
+   */
+  function changeUsername($oldUserName, $newUserName){
+    return $this->connection->process_query(User::$actions['ChangeUsername'], compact('oldUserName', 'newUserName'));
+  }
 }
