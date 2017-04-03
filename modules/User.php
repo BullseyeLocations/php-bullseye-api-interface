@@ -27,6 +27,14 @@ class User{
       'httpMethod' => 'post',
       'action' => 'RestUser.svc/ChangeUsername',
     ),
+    
+    /**
+     * https://bullseyelocations.readme.io/v1.0/reference#changeactivestatus
+     */
+    'ChangeActiveStatus' => array(
+      'httpMethod' => 'post',
+      'action' => 'RestUser.svc/ChangeActiveStatus',
+    ),
   );
 }
 

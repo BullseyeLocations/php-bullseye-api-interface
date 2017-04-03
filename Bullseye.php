@@ -275,4 +275,13 @@ class Bullseye{
   function changeUsername($oldUserName, $newUserName){
     return $this->connection->process_query(User::$actions['ChangeUsername'], compact('oldUserName', 'newUserName'));
   }
+  
+  /**
+   * https://bullseyelocations.readme.io/v1.0/reference#changeactivestatus
+   *
+   * User module.
+   */
+  function changeActiveStatus($userName, $activeStatus){
+    return $this->connection->process_query(User::$actions['ChangeActiveStatus'], compact('userName', 'activeStatus'));
+  }
 }
