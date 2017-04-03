@@ -10,12 +10,12 @@ $useStagingServer = true;
 $bullseye = new Bullseye\Bullseye($clientId, $searchKey, $adminKey, $useStagingServer);
 
 //2.1 activate debug mode
-$bullseye->debug(true);
+//$bullseye->debug(true);
 
 //3. Call method to add lead
 $leadData = array(
   //'LocationId' => '4885827',
-  'LeadJson' => array(
+  'NewLead' => array(
     'FirstName' => 'Carlos',
     'LastName' => 'Test',
     //'CompanyName' => '',
