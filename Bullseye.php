@@ -294,4 +294,13 @@ class Bullseye{
   function eventSearch($args){
     return $this->connection->process_query(EventSearch::$actions['EventSearch'], $args);
   }
+  
+  /**
+   * https://bullseyelocations.readme.io/v1.0/reference#getcategories
+   *
+   * Event Search module.
+   */
+  function getEventCategories(){
+    return $this->connection->process_query(EventSearch::$actions['GetCategories']);
+  }
 }

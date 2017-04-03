@@ -19,6 +19,13 @@ class EventSearch{
       'action' => 'RestEventSearch.svc/EventSearch',
     ),
     
+    /**
+     * https://bullseyelocations.readme.io/v1.0/reference#getcategories
+     */
+    'GetCategories' => array(
+      'httpMethod' => 'get',
+      'action' => 'RestEventSearch.svc/GetCategories',
+    ),
   );
 }
 
