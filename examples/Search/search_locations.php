@@ -12,7 +12,7 @@ $bullseye = new Bullseye\Bullseye($clientId, $searchKey, $adminKey, $useStagingS
 //2.1 activate debug mode
 //$bullseye->debug(true);
 
-//3. Call method to delete the location
+//3. Call method to search locations(DoSearch2)
 $searchArgs = array(
   "City" => "New York",
   "State" =>  "NJ",
