@@ -31,6 +31,14 @@ class Lead{
       'httpMethod' => 'get',
       'action' => 'RestLead.svc/AuthenticateClient',
     ),
+    
+    /**
+     * https://bullseyelocations.readme.io/v1.0/reference#lead-polling
+     */
+    'GetLeads' => array(
+      'httpMethod' => 'get',
+      'action' => 'RestLead.svc/GetLeads',
+    ),
   );
 }
 

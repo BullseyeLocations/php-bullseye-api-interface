@@ -130,7 +130,7 @@ class Bullseye{
    * Search module.
    */
   function getCategories($order = false){
-    return $this->connection->process_query(Search::$actions['GetCategories'], null, compact('order'));
+    return $this->connection->process_query(Search::$actions['GetCategories'], [], compact('order'));
   }
   
   /**
@@ -266,6 +266,15 @@ class Bullseye{
    */
   function authenticateClient(){
     return $this->connection->process_query(Lead::$actions['AuthenticateClient']);
+  }
+  
+  /**
+   * https://bullseyelocations.readme.io/v1.0/reference#lead-polling
+   *
+   * Lead module.
+   */
+  function getLeads($args){
+    return $this->connection->process_query(Lead::$actions['GetLeads'], $args, [], true);
   }
   
   /**

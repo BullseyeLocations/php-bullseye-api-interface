@@ -46,6 +46,11 @@ class Connection{
    * Store error making the last request to Bullseye.
    */
   private $lastError = null;
+  
+  /**
+   * Store client token to authentcate requests.
+   */
+  private $clientToken = null;
 
   /**
    * Create a connection object for a Bullseye client.
@@ -60,6 +65,14 @@ class Connection{
     $this->searchKey = $searchKey;
     $this->adminKey = $adminKey;
     $this->staging = $staging;
+    
+    //get Client Token
+    $clientToken = $this->process_query([
+      'httpMethod' => 'get',
+      'action' => 'RestLead.svc/AuthenticateClient'
+    ]);
+    if(false !== $clientToken)
+      $this->clientToken = $clientToken;
   }
   
   function getClientId(){
@@ -80,14 +93,17 @@ class Connection{
    * @param $httpMethod string GET or POST.
    * @param $action string method to call in Bullseye API (i.e: RestLocation.svc/AddLocation)
    * @param $args array arguments to send in the request. ClientId and AdminKey are already included.
-   * @param $decodeAssoc boolen if it is true, then objects decoded are created as associative arrays.
+   * @param $clientToken boolean if true, then ClientToken HTTP header is used to authenticate request, instead ClientId and ApiKey.not used. Default false.
    */
-  public function query($httpMethod, $action, $args = array(), $decodeAssoc = true) {
-    //set Api key to use in the request
-    $args['ApiKey'] = $this->adminKey ? $this->adminKey : $this->searchKey;
+  public function query($httpMethod, $action, $args = array(), $useClientToken = false) {
+    //append ClientId and ApiKey to request
+    if(!$useClientToken){
+      //set Api key to use in the request
+      $args['ApiKey'] = $this->adminKey ? $this->adminKey : $this->searchKey;
 
-    // Specific ClientId for all calls
-    $args['ClientId'] = $this->clientId;
+      // Specific ClientId for all calls
+      $args['ClientId'] = $this->clientId;
+    }
 
     //build URL of web service
     $fullUrl = $this->staging ? $this->staging_url : $this->production_url;
@@ -104,6 +120,7 @@ class Connection{
     $options = array();
     $options[CURLOPT_URL] = $fullUrl;
     $options[CURLOPT_RETURNTRANSFER] = true;
+    $options[CURLOPT_HTTPHEADER] = [];
 
     //check if request is POST
     if("post" == $httpMethod) {
@@ -114,8 +131,13 @@ class Connection{
       $options[CURLOPT_POSTFIELDS] = $dataString;
       $options[CURLOPT_HTTPHEADER] = array(
         'Content-Type: application/json',
-        'Content-Length: ' . strlen($dataString));
+        'Content-Length: ' . strlen($dataString)
+      );
     }
+    
+    //add ClientToken header to authenticate request
+    if($useClientToken)
+      $options[CURLOPT_HTTPHEADER] []= 'ClientToken: ' . $this->clientToken;
 
     //execute request
     curl_setopt_array($curl, $options);
@@ -155,19 +177,19 @@ class Connection{
     if($httpcode !== self::HTTP_OK)
       $this->lastError = array(
         'code' => $httpcode,
-        'response' => json_decode($response, $decodeAssoc)
+        'response' => json_decode($response, true)
       );
     else
       $this->lastError = null;
     
     //returns response
-    return array($httpcode, json_decode($response, $decodeAssoc));
+    return array($httpcode, json_decode($response, true));
   }
   
   /**
    * This function makes a query and process its response. It is created to not duplicate code in most of requests.
    *
-   * $method array Associative array with info of method to execute. i.e:
+   * @param $method array Associative array with info of method to execute. i.e:
    *   'GetCatSum' => [
    *     'httpMethod' => 'get',
    *     'action' => 'ModulePath/MyAction',
@@ -179,13 +201,14 @@ class Connection{
    *       ]
    *     ]
    *   ]
-   * $args array Associative array with data to send in request.
+   * @param $args array Associative array with data to send in request.
+   * @param $clientToken boolean if true, then ClientToken HTTP header is used to authenticate request, instead ClientId and ApiKey. Default false.
    *
    * @return mixed false if there is an error. Otherwise the request response.
    */
-  public function process_query($method, $args = array(), $callbacksArgs = array()){
+  public function process_query($method, $args = array(), $callbacksArgs = array(), $useClientToken = false){
     //extract arg to make query
-    $httpMethod = $action = $decodeAssoc = $callbacks = null;
+    $httpMethod = $action = $callbacks = null;
     extract($method);
     
     //first callback to edit args before query execution
@@ -193,7 +216,7 @@ class Connection{
       $args = self::executeCallback($callbacks['before_query'], $callbacksArgs, $args);
   
     //makes requests
-    list($httpcode, $response) = $this->query($httpMethod, $action, $args, $decodeAssoc);
+    list($httpcode, $response) = $this->query($httpMethod, $action, $args, $useClientToken);
     
     //validate HTTP code of response
     if($httpcode !== self::HTTP_OK) {
