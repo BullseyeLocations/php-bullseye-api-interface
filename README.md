@@ -6,7 +6,7 @@ Bullseye has a unique focus on the right implementation for the right client. We
 
 # PHP Library
 
-The Bullseye PHP library was developed to make easier to implement solutions using the Bullseye REST API. The library is in charge of handling and processing requests to the REST API and also provides an interface to request the API easily just creating a Bullseye object and calling its methods.
+The Bullseye PHP library was created to make easier to implement solutions using the Bullseye REST API. The library is in charge of handling and processing requests to the REST API and also provides an interface to request the API easily just creating a Bullseye object and calling its methods.
 
 ## Installation
 
@@ -21,8 +21,8 @@ $bullseye = new Bullseye\Bullseye($clientId, $searchKey, $adminKey);
 
 ## Example
 
-There are examples for all REST API endpoints in [Bullseye documentation](https://api.bullseyelocations.com)
-Next is an example about how to make a request using the library:
+There are examples for all REST API endpoints in [Bullseye documentation](https://api.bullseyelocations.com).
+The following is an example about how to make a request using the library:
 
 ```
 //1. Include Bullseye library
