@@ -35,6 +35,14 @@ class User{
       'httpMethod' => 'post',
       'action' => 'RestUser.svc/ChangeActiveStatus',
     ),
+    
+    /**
+     * https://bullseyelocations.readme.io/v1.0/reference#createuser
+     */
+    'CreateUser' => array(
+      'httpMethod' => 'post',
+      'action' => 'RestUser.svc/CreateUser',
+    ),
   );
 }
 
