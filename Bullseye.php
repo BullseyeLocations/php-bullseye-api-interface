@@ -242,6 +242,15 @@ class Bullseye{
   }
   
   /**
+   * https://bullseyelocations.readme.io/v1.0/reference#getsearchresponselog
+   *
+   * Search module.
+   */
+  function getSearchResponseLog($startDate, $endDate){
+    return $this->connection->process_query(Search::$actions['GetSearchResponseLog'], compact('startDate', 'endDate'));
+  }
+  
+  /**
    * https://bullseyelocations.readme.io/v1.0/reference#addlead
    *
    * Lead module.

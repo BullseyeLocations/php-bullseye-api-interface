@@ -125,6 +125,14 @@ class Search{
       'httpMethod' => 'get',
       'action' => 'RestSearch.svc/GetClientSearchSettings'
     ),
+    
+    /**
+     * https://bullseyelocations.readme.io/v1.0/reference#getsearchresponselog
+     */
+    'GetSearchResponseLog' => array(
+      'httpMethod' => 'get',
+      'action' => 'RestSearch.svc/GetSearchResponseLog'
+    ),
   );
   
   /**
