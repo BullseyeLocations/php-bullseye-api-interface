@@ -251,6 +251,15 @@ class Bullseye{
   }
   
   /**
+   * https://bullseyelocations.readme.io/v1.0/reference#getlocationbyip
+   *
+   * Search module.
+   */
+  function getLocationByIP($IPAddress){
+    return $this->connection->process_query(Search::$actions['GetLocationByIP'], compact('IPAddress'));
+  }
+  
+  /**
    * https://bullseyelocations.readme.io/v1.0/reference#addlead
    *
    * Lead module.
