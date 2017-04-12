@@ -323,6 +323,15 @@ class Bullseye{
   }
   
   /**
+   * https://bullseyelocations.readme.io/v1.0/reference#getuser
+   *
+   * User module.
+   */
+  function getUser($memberKey){
+    return $this->connection->process_query(User::$actions['GetUser'], compact('memberKey'));
+  }
+  
+  /**
    * https://bullseyelocations.readme.io/v1.0/reference#eventsearch
    *
    * Event Search module.

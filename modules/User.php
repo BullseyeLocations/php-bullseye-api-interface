@@ -43,6 +43,14 @@ class User{
       'httpMethod' => 'post',
       'action' => 'RestUser.svc/CreateUser',
     ),
+    
+    /**
+     * https://bullseyelocations.readme.io/v1.0/reference#getuser
+     */
+    'GetUser' => array(
+      'httpMethod' => 'get',
+      'action' => 'RestUser.svc/GetUser',
+    ),
   );
 }
 
