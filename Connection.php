@@ -7,7 +7,7 @@ class Connection{
    * @var url
    */
   private $production_url = "http://ws.bullseyelocations.com";
-  private $staging_url = "http://ws.staging.bullseyelocations.com";
+  private $staging_url = "http://ws.bullseyelocations-staging.com";
   
   /**
    * Client ID in Bullseye platform.
